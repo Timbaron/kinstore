@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import '@/assets/styles/globals.css';
 
+import { ThemeProvider } from 'next-themes';
 import { Inter } from 'next/font/google';
 
 import { APP_DESCRIPTION, APP_NAME, SERVER_URL } from '@/lib/constants';
@@ -22,11 +23,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${inter.className} antialiased`}
       >
-        {children}
+        <ThemeProvider
+          attribute={'class'}
+          defaultTheme="light"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
